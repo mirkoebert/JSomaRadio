@@ -12,7 +12,7 @@ import java.net.URL;
 
 @Service
 @Slf4j
-public class StationService {
+class StationService {
 
     private static final String somaBaseUrl = "https://somafm.com/nossl/";
     @Getter
@@ -22,16 +22,10 @@ public class StationService {
     @Setter
     private int selectedStationIndex = 0;
 
-    String getSelectedStationPlsUrl() {
-        return somaBaseUrl + stationsPls[selectedStationIndex];
-    }
-
-    URL getSelectedStationPlsUrlV2() {
+    URL getSelectedStationPlsUrl() {
         try {
             return new URI(somaBaseUrl + stationsPls[selectedStationIndex]).toURL();
-        } catch (MalformedURLException e) {
-            throw new RuntimeException(e);
-        } catch (URISyntaxException e) {
+        } catch (MalformedURLException | URISyntaxException e) {
             throw new RuntimeException(e);
         }
     }

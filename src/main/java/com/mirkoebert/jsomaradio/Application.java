@@ -14,6 +14,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.net.URL;
 import java.util.Arrays;
 
 import static javax.swing.JOptionPane.INFORMATION_MESSAGE;
@@ -24,8 +25,10 @@ import static javax.swing.JOptionPane.INFORMATION_MESSAGE;
 public class Application extends JFrame {
 
     @Autowired
-    private PlayerV2 playerV2;
+    private Mp3StreamPlayer mp3StreamPlayer;
     private final StationService stationService = new StationService();
+    private final PlayListService playListService = new PlayListService();
+
     private JDialog donationBox;
     private JDialog aboutBox;
 
@@ -48,7 +51,11 @@ public class Application extends JFrame {
 
     private void initUI() {
         var playButton = new JButton("Play");
-        playButton.addActionListener((ActionEvent event) -> playerV2.playIt(stationService.getSelectedStationPlsUrl()));
+        playButton.addActionListener((ActionEvent event) -> {
+            URL stationUrl = stationService.getSelectedStationPlsUrl();
+            URL streamUrl = playListService.getAudioStreamURL(stationUrl);
+            mp3StreamPlayer.playStream(streamUrl);
+        });
 
         var quitButton = new JButton("Quit");
         quitButton.addActionListener((ActionEvent event) -> System.exit(0));
@@ -64,8 +71,10 @@ public class Application extends JFrame {
             if (!event.getValueIsAdjusting()) {
                 log.info("Select {}", stationList.getSelectedIndex());
                 stationService.setSelectedStationIndex(stationList.getSelectedIndex());
-                playerV2.stop();
-                playerV2.playIt(stationService.getSelectedStationPlsUrl());
+                mp3StreamPlayer.stop();
+                URL stationUrl = stationService.getSelectedStationPlsUrl();
+                URL streamUrl = playListService.getAudioStreamURL(stationUrl);
+                mp3StreamPlayer.playStream(streamUrl);
             }
 
         });

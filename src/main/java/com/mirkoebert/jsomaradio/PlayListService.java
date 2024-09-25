@@ -7,23 +7,26 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
-import java.io.IOException;
 import java.net.URL;
 
 @Service
 @Slf4j
-public class PlayListService {
+class PlayListService {
 
     @Cacheable("urls")
-    URL getAudioStreamURL(final String selectedPlsUrl) throws IOException {
-        log.info("Get streaming URL from playlist");
-        final SpecificPlaylist specificPlaylist = SpecificPlaylistFactory.getInstance().readFrom(new URL(selectedPlsUrl));
-        specificPlaylist.toPlaylist().getRootSequence().getComponents().forEach(component -> {
-            if (component instanceof Media media) {
-                log.info("Media with content-source {}", media.getSource().toString());
-            }
-        });
-        final Media first = (Media) specificPlaylist.toPlaylist().getRootSequence().getComponents().getFirst();
-        return first.getSource().getURL();
+    URL getAudioStreamURL(final URL selectedPlsUrl)  {
+        try {
+            log.info("Get streaming URL from playlist");
+            final SpecificPlaylist specificPlaylist = SpecificPlaylistFactory.getInstance().readFrom(selectedPlsUrl);
+            specificPlaylist.toPlaylist().getRootSequence().getComponents().forEach(component -> {
+                if (component instanceof Media media) {
+                    log.info("Media with content-source {}", media.getSource().toString());
+                }
+            });
+            final Media first = (Media) specificPlaylist.toPlaylist().getRootSequence().getComponents().getFirst();
+            return first.getSource().getURL();
+        } catch (Exception e){
+            return null;
+        }
     }
 }
