@@ -55,7 +55,7 @@ public class Application extends JFrame {
         var donateButton = new JButton("Donate");
         donateButton.addActionListener((ActionEvent event) -> openSomaFmDonateLinkInDefaultBrowser());
 
-        var aboutButton = new JButton("About");
+        var aboutButton = new JButton("About"); 
         aboutButton.addActionListener((ActionEvent event) -> aboutBox.setVisible(true));
 
         final JList<String> stationList = new JList<>(stationService.getStationsNames());
@@ -74,6 +74,7 @@ public class Application extends JFrame {
         setSize(500, 500);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
+        playButton.requestFocus();
     }
 
 
@@ -103,8 +104,8 @@ public class Application extends JFrame {
         val pane1 = new JOptionPane("Please support Soma FM and go to https://somafm.com/support/", INFORMATION_MESSAGE);
         donationBox = pane1.createDialog(pane, "Donate");
 
-        val pane2 = new JOptionPane("J Soma Radio", INFORMATION_MESSAGE);
-        aboutBox = pane2.createDialog(pane, "Donate");
+        val pane2 = new JOptionPane("J Soma Radio \nhttps://github.com/mirkoebert/JSomaRadio", INFORMATION_MESSAGE);
+        aboutBox = pane2.createDialog(pane, "About");
     }
 
     private void openSomaFmDonateLinkInDefaultBrowser() {
