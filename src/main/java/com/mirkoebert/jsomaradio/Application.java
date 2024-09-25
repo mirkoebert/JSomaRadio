@@ -31,6 +31,7 @@ public class Application extends JFrame {
 
     public Application() {
         initUI();
+        log.info("Verions {}", getClass().getPackage().getImplementationVersion());
     }
 
     public static void main(String[] args) {
@@ -55,7 +56,7 @@ public class Application extends JFrame {
         var donateButton = new JButton("Donate");
         donateButton.addActionListener((ActionEvent event) -> openSomaFmDonateLinkInDefaultBrowser());
 
-        var aboutButton = new JButton("About"); 
+        var aboutButton = new JButton("About");
         aboutButton.addActionListener((ActionEvent event) -> aboutBox.setVisible(true));
 
         final JList<String> stationList = new JList<>(stationService.getStationsNames());
