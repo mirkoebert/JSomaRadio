@@ -71,8 +71,7 @@ public class Application extends JFrame {
             if (!event.getValueIsAdjusting()) {
                 log.info("Select {}", stationList.getSelectedIndex());
                 stationService.setSelectedStationIndex(stationList.getSelectedIndex());
-                mp3StreamPlayer.stop();
-                URL stationUrl = stationService.getSelectedStationPlsUrl();
+                URL stationUrl = stationS           ervice.getSelectedStationPlsUrl();
                 URL streamUrl = playListService.getAudioStreamURL(stationUrl);
                 mp3StreamPlayer.playStream(streamUrl);
             }

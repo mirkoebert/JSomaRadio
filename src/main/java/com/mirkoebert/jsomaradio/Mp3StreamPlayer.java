@@ -15,15 +15,23 @@ import java.util.Map;
 @Slf4j
 class Mp3StreamPlayer extends StreamPlayer implements StreamPlayerListener {
 
+    private URL currenAudioStreamUrl;
 
     Mp3StreamPlayer() {
         addStreamPlayerListener(this);
     }
 
-    void playStream(final URL audioFilePath)  {
-        log.info("playIt2: {}", audioFilePath);
+    void playStream(final URL audioStreamUrl)  {
+        log.info("playStream: {}", audioStreamUrl);
+        if ((currenAudioStreamUrl != null) && (audioStreamUrl.toString().equals(currenAudioStreamUrl.toString()))) {
+            log.info("Ignore request. Stream {} is still playing.", currenAudioStreamUrl);
+            return;
+        }
+        stop();
+        currenAudioStreamUrl = audioStreamUrl;
+
         try {
-            final InputStream in = audioFilePath.openStream();
+            final InputStream in = audioStreamUrl.openStream();
             final BufferedInputStream buf = new BufferedInputStream(in);
             open(buf);
             play();
