@@ -19,7 +19,7 @@ class StationService {
     private final String[] stationsNames = {"Secret Agent", "PopTron"};
     private final String[] stationsPls = {"secretagent.pls", "poptron.pls"};
 
-    private int selectedStationIndex = 0;
+    private int selectedStationIndex;
 
     StationService(){
         selectedStationIndex = prefs.getInt("selectedStationIndex", 0);

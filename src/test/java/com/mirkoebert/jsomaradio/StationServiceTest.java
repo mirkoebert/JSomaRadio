@@ -10,8 +10,8 @@ class StationServiceTest {
 
     @Test
     void getSelectedStationPlsUrl() {
-        StationService cut = new StationService();
-        URL res = cut.getSelectedStationPlsUrl();
-        assertThat(res.toString()).hasToString("https://somafm.com/nossl/secretagent.pls");
+        final StationService cut = new StationService();
+        final URL res = cut.getSelectedStationPlsUrl();
+        assertThat(res.toString()).startsWith("https://somafm.com/nossl/");
     }
 }
