@@ -13,7 +13,7 @@ import java.net.URL;
 @Slf4j
 class PlayListService {
 
-    @Cacheable("urls")
+    @Cacheable("selectedPlsUrl")
     URL getAudioStreamURL(final URL selectedPlsUrl)  {
         try {
             log.info("Get streaming URL from playlist");

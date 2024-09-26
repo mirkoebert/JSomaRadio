@@ -52,9 +52,7 @@ public class Application extends JFrame {
     private void initUI() {
         var playButton = new JButton("Play");
         playButton.addActionListener((ActionEvent event) -> {
-            URL stationUrl = stationService.getSelectedStationPlsUrl();
-            URL streamUrl = playListService.getAudioStreamURL(stationUrl);
-            mp3StreamPlayer.playStream(streamUrl);
+            play();
         });
 
         var quitButton = new JButton("Quit");
@@ -71,9 +69,7 @@ public class Application extends JFrame {
             if (!event.getValueIsAdjusting()) {
                 log.info("Select {}", stationList.getSelectedIndex());
                 stationService.setSelectedStationIndex(stationList.getSelectedIndex());
-                URL stationUrl = stationS           ervice.getSelectedStationPlsUrl();
-                URL streamUrl = playListService.getAudioStreamURL(stationUrl);
-                mp3StreamPlayer.playStream(streamUrl);
+                play();
             }
 
         });
@@ -84,6 +80,12 @@ public class Application extends JFrame {
         setLocationRelativeTo(null);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         playButton.requestFocus();
+    }
+
+    private void play() {
+        final URL stationUrl = stationService.getSelectedStationPlsUrl();
+        final URL streamUrl = playListService.getAudioStreamURL(stationUrl);
+        mp3StreamPlayer.playStream(streamUrl);
     }
 
 

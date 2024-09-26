@@ -23,8 +23,10 @@ class Mp3StreamPlayer extends StreamPlayer implements StreamPlayerListener {
 
     void playStream(final URL audioStreamUrl)  {
         log.info("playStream: {}", audioStreamUrl);
-        if ((currenAudioStreamUrl != null) && (audioStreamUrl.toString().equals(currenAudioStreamUrl.toString()))) {
-            log.info("Ignore request. Stream {} is still playing.", currenAudioStreamUrl);
+        if (stopStream(audioStreamUrl)){
+            stop();
+            log.info("Stop playing Stream {}.", currenAudioStreamUrl);
+            currenAudioStreamUrl = null;
             return;
         }
         stop();
@@ -40,10 +42,20 @@ class Mp3StreamPlayer extends StreamPlayer implements StreamPlayerListener {
         }
     }
 
+    boolean stopStream(final URL audioStreamUrl){
+        if (currenAudioStreamUrl == null){
+            return false;
+        }
+        if (audioStreamUrl.toString().equals(currenAudioStreamUrl.toString())){
+            return true;
+        }
+        return false;
+    }
+
     @Override
     public void opened(Object dataSource, Map<String, Object> properties) {
 
-    }
+            }
 
     @Override
     public void progress(int nEncodedBytes, long microsecondPosition, byte[] pcmData, Map<String, Object> properties) {
