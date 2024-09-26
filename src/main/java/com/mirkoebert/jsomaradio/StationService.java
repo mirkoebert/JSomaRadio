@@ -1,10 +1,10 @@
 package com.mirkoebert.jsomaradio;
 
 import lombok.Getter;
-import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.util.prefs.Preferences;
 import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -19,8 +19,14 @@ class StationService {
     private final String[] stationsNames = {"Secret Agent", "PopTron"};
     private final String[] stationsPls = {"secretagent.pls", "poptron.pls"};
 
-    @Setter
     private int selectedStationIndex = 0;
+
+    StationService(){
+        selectedStationIndex = prefs.getInt("selectedStationIndex", 0);
+        log.info("Restore last select station index {}", selectedStationIndex);
+    }
+
+    private Preferences prefs = Preferences.userNodeForPackage(getClass());
 
     URL getSelectedStationPlsUrl() {
         try {
@@ -28,5 +34,9 @@ class StationService {
         } catch (MalformedURLException | URISyntaxException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    void setSelectedStationIndex(int i) {
+        prefs.putInt("selectedStationIndex", i);
     }
 }
