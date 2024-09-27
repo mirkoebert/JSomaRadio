@@ -25,10 +25,9 @@ import static javax.swing.JOptionPane.INFORMATION_MESSAGE;
 public class Application extends JFrame {
 
     @Autowired
-    private Mp3StreamPlayer mp3StreamPlayer;
+    private PlayerService playerService;
     private final StationService stationService = new StationService();
-    private final PlayListService playListService = new PlayListService();
-
+  
     private JDialog donationBox;
     private JDialog aboutBox;
 
@@ -52,7 +51,7 @@ public class Application extends JFrame {
     private void initUI() {
         var playButton = new JButton("Play");
         playButton.addActionListener((ActionEvent event) -> {
-            play();
+            playerService.buttonClicked();
         });
 
         var quitButton = new JButton("Quit");
@@ -68,8 +67,7 @@ public class Application extends JFrame {
         stationList.addListSelectionListener((ListSelectionEvent event) -> {
             if (!event.getValueIsAdjusting()) {
                 log.info("Select {}", stationList.getSelectedIndex());
-                stationService.setSelectedStationIndex(stationList.getSelectedIndex());
-                play();
+                playerService.listItemSelected(stationList.getSelectedIndex());
             }
 
         });
@@ -81,13 +79,6 @@ public class Application extends JFrame {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         playButton.requestFocus();
     }
-
-    private void play() {
-        final URL stationUrl = stationService.getSelectedStationPlsUrl();
-        final URL streamUrl = playListService.getAudioStreamURL(stationUrl);
-        mp3StreamPlayer.playStream(streamUrl);
-    }
-
 
     private void createLayout(final JComponent main, final JButton... buttons) {
         var pane = getContentPane();

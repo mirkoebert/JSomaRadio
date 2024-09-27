@@ -19,6 +19,8 @@ class StationService {
     private final String[] stationsNames = {"Secret Agent", "PopTron"};
     private final String[] stationsPls = {"secretagent.pls", "poptron.pls"};
 
+    private Preferences prefs = Preferences.userNodeForPackage(getClass());
+    @Getter
     private int selectedStationIndex;
 
     StationService(){
@@ -26,17 +28,20 @@ class StationService {
         log.info("Restore last select station index {}", selectedStationIndex);
     }
 
-    private Preferences prefs = Preferences.userNodeForPackage(getClass());
 
     URL getSelectedStationPlsUrl() {
-        try {
-            return new URI(somaBaseUrl + stationsPls[selectedStationIndex]).toURL();
-        } catch (MalformedURLException | URISyntaxException e) {
-            throw new RuntimeException(e);
-        }
+        return getStationPlsUrl(selectedStationIndex);
     }
 
     void setSelectedStationIndex(int i) {
         prefs.putInt("selectedStationIndex", i);
+    }
+
+    public URL getStationPlsUrl(int i) {
+        try {
+            return new URI(somaBaseUrl + stationsPls[i]).toURL();
+        } catch (MalformedURLException | URISyntaxException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
