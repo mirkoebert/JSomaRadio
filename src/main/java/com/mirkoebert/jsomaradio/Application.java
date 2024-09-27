@@ -27,7 +27,7 @@ public class Application extends JFrame {
     @Autowired
     private PlayerService playerService;
     private final StationService stationService = new StationService();
-  
+
     private JDialog donationBox;
     private JDialog aboutBox;
 

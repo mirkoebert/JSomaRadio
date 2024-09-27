@@ -15,9 +15,10 @@ import java.net.URL;
 class StationService {
 
     private static final String somaBaseUrl = "https://somafm.com/nossl/";
+    private static final String plsExtension = ".pls";
     @Getter
-    private final String[] stationsNames = {"Secret Agent", "PopTron"};
-    private final String[] stationsPls = {"secretagent.pls", "poptron.pls"};
+    private final String[] stationsNames = {"Groove Salad","Drone Zone","Deep Space One","Indie Pop Rocks!","Secret Agent", "PopTron"};
+    private final String[] stationsPls = {"groovesalad","dronezone","deepspaceone","indiepop","secretagent", "poptron"};
 
     private Preferences prefs = Preferences.userNodeForPackage(getClass());
     @Getter
@@ -39,7 +40,7 @@ class StationService {
 
     public URL getStationPlsUrl(int i) {
         try {
-            return new URI(somaBaseUrl + stationsPls[i]).toURL();
+            return new URI(somaBaseUrl + stationsPls[i] + plsExtension).toURL();
         } catch (MalformedURLException | URISyntaxException e) {
             throw new RuntimeException(e);
         }
