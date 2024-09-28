@@ -1,5 +1,6 @@
 package com.mirkoebert.jsomaradio;
 
+import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -58,5 +59,13 @@ public class PlayerService {
         player.stop();
         nextStationUrl = currenStationUrl;
         currenStationUrl = null;
+    }
+
+    @PostConstruct
+    void preLoadLastPls(){
+        // TODO put into a own thread to unblock gui    
+        final URL preloadStationUrl = stationService.getSelectedStationPlsUrl();
+        log.info("PostConstruct: preload latest station {} playlist for faster start", preloadStationUrl);
+        playListService.getAudioStreamURL(preloadStationUrl);
     }
 }

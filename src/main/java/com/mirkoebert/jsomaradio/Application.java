@@ -14,13 +14,11 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.net.URL;
 import java.util.Arrays;
 
 import static javax.swing.JOptionPane.INFORMATION_MESSAGE;
 
 @SpringBootApplication
-@EnableCaching
 @Slf4j
 public class Application extends JFrame {
 
