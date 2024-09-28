@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.WebApplicationType;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
-import org.springframework.cache.annotation.EnableCaching;
 
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
@@ -29,9 +28,11 @@ public class Application extends JFrame {
     private JDialog donationBox;
     private JDialog aboutBox;
 
+    //  private String version = "@project.version@ ";
+
     public Application() {
         initUI();
-        log.info("Verions {}", getClass().getPackage().getImplementationVersion());
+        log.info("Verion {}", getClass().getPackage().getImplementationVersion());
     }
 
     public static void main(String[] args) {
@@ -48,9 +49,7 @@ public class Application extends JFrame {
 
     private void initUI() {
         var playButton = new JButton("Play");
-        playButton.addActionListener((ActionEvent event) -> {
-            playerService.buttonClicked();
-        });
+        playButton.addActionListener((ActionEvent event) -> playerService.buttonClicked());
 
         var quitButton = new JButton("Quit");
         quitButton.addActionListener((ActionEvent event) -> System.exit(0));
