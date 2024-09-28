@@ -28,8 +28,6 @@ public class Application extends JFrame {
     private JDialog donationBox;
     private JDialog aboutBox;
 
-    //  private String version = "@project.version@ ";
-
     public Application() {
         initUI();
         log.info("Verion {}", getClass().getPackage().getImplementationVersion());
