@@ -8,9 +8,11 @@ command: jsoma
 finish-args:
   - --device=dri
   - --env=PATH=/app/bin:/app/jre/bin:/usr/bin
+  - --socket=wayland
   - --socket=x11
   - --share=network
   - --socket=pulseaudio
+  - --filesystem=home
 modules:
   - name: openjdk
     buildsystem: simple
