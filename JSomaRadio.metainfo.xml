@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop">
+    <id>com.mirkoebert.JSomaRAdio</id>
+    <name>JSomaRadio</name>
+    <metadata_license>CC0-1.0</metadata_license>
+    <url type="homepage">https://github.com/mirkoebert/JSomaRadio</url>
+    <content_rating type="oars-1.1"/>
+    <summary>A simple radio with built-in stations from the website somafm.com</summary>
+    <description>
+        <p>Simple Java based Soma FM Player. A simple radio with a clear and concise interface. You can listen to your favorite stations.
+        43 stations from the site somafm.com already embedded in the application.</p>
+        <ul>
+            <li>Preloaded Station list</li>
+        </ul>
+    </description>
+    <developer id="com.evert-p">
+        <name>Mirko Ebert</name>
+    </developer>
+    <keywords>
+        <keyword>Radio</keyword>
+    </keywords>
+    <launchable type="desktop-id">com.mirkoebert.JSomaRadio.desktop</launchable>
+    <releases>
+        <release version="0.0.1" date="2024-09-29">
+            <description>
+                <ul>
+                    <li>Initial release</li>
+                </ul>
+            </description>
+        </release>
+    </releases>
+</component>

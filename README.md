@@ -19,3 +19,6 @@ flatpak-builder --force-clean --user --install-deps-from=flathub --repo=repo --i
 
 flatpak run  com.mirkoebert.JSomaRadio
 
+Check flatpack build manifest   
+flatpak run --command=flatpak-builder-lint org.flatpak.Builder appstream JSomaRadio.metainfo.xml
+
