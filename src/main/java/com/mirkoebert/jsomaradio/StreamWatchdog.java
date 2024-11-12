@@ -29,23 +29,22 @@ public class StreamWatchdog {
             if (in == null) {
                 log.warn("In stream is null");
             } else if (in.available() > 0) {
-                log.info("In stream is ok");
+                log.debug("In stream is ok");
             } else {
                 log.warn("In stream is not ok");
                 openNewPlayerWithNewStream();
             }
         } catch (IOException e) {
-            log.warn("QQQ {}", e.getMessage());
+            log.warn("Can't determine stream {}", e.getMessage());
         }
     }
 
     private void openNewPlayerWithNewStream() {
         try {
             in = audioStreamUrl.openStream();
-//            mp3StreamPlayer.stop();
             mp3StreamPlayer.playStream(in);
         } catch (IOException e) {
-            log.error("Cant play stream: {}", audioStreamUrl);
+            log.error("Can't play stream: {}", audioStreamUrl);
         }
     }
 
@@ -54,7 +53,7 @@ public class StreamWatchdog {
         try {
             in.close();
         } catch (IOException e) {
-            log.warn("Cant close stream after stopping the player");
+            log.warn("Can't close stream after stopping the player");
         }
     }
 }

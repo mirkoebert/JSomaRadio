@@ -6,32 +6,15 @@ import com.goxr3plus.streamplayer.stream.StreamPlayerListener;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
-import java.io.BufferedInputStream;
 import java.io.InputStream;
-import java.net.URL;
 import java.util.Map;
 
 @Service
 @Slf4j
 class Mp3StreamPlayer extends StreamPlayer implements StreamPlayerListener {
 
-    private InputStream in;
-
     Mp3StreamPlayer() {
         addStreamPlayerListener(this);
-    }
-
-    void playStream(final URL audioStreamUrl) {
-        log.info("playStream: {}", audioStreamUrl);
-
-        try {
-            in = audioStreamUrl.openStream();
-            final BufferedInputStream buf = new BufferedInputStream(in);
-            open(buf);
-            play();
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
     }
 
     void playStream(final InputStream in) {
@@ -47,7 +30,7 @@ class Mp3StreamPlayer extends StreamPlayer implements StreamPlayerListener {
 
     @Override
     public void opened(Object dataSource, Map<String, Object> properties) {
-        log.info("Opend: {}, {}", dataSource, properties);
+        log.info("Opened: {}, {}", dataSource, properties);
     }
 
     @Override
@@ -66,3 +49,4 @@ class Mp3StreamPlayer extends StreamPlayer implements StreamPlayerListener {
     }
 
 }
+    
