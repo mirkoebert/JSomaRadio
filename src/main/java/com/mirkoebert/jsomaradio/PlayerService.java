@@ -53,7 +53,7 @@ public class PlayerService {
         }
     }
 
-    private void stop() {
+    void stop() {
         log.info("Stop station {}", currenStationUrl);
         player.stop();
         nextStationUrl = currenStationUrl;

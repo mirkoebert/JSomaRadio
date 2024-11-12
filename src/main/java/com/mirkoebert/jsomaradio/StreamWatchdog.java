@@ -1,5 +1,6 @@
 package com.mirkoebert.jsomaradio;
 
+import com.goxr3plus.streamplayer.enums.Status;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -17,7 +18,7 @@ public class StreamWatchdog {
     private final Mp3StreamPlayer mp3StreamPlayer;
     private InputStream in;
     private URL audioStreamUrl;
-
+        
     void playStream(final URL audioStreamUrl) {
         this.audioStreamUrl = audioStreamUrl;
         openNewPlayerWithNewStream();
@@ -25,17 +26,19 @@ public class StreamWatchdog {
 
     @Scheduled(fixedRate = 2000)
     void watchDog() {
-        try {
-            if (in == null) {
-                log.warn("In stream is null");
-            } else if (in.available() > 0) {
-                log.debug("In stream is ok");
-            } else {
-                log.warn("In stream is not ok");
-                openNewPlayerWithNewStream();
+        if (mp3StreamPlayer.getStatus() == Status.PLAYING) {
+            try {
+                if (in == null) {
+                    log.warn("In stream is null");
+                } else if (in.available() > 0) {
+                    log.debug("In stream is ok");
+                } else {
+                    log.warn("In stream is not ok");
+                    openNewPlayerWithNewStream();
+                }
+            } catch (IOException e) {
+                log.warn("Can't determine stream {}", e.getMessage());
             }
-        } catch (IOException e) {
-            log.warn("Can't determine stream {}", e.getMessage());
         }
     }
 

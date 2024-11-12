@@ -35,6 +35,7 @@ public class Application extends JFrame {
     }
 
     public static void main(String[] args) {
+        log.info("Welcome on Board of te Bebop");
         log.info("LookAndFeelClassName {}", UIManager.getSystemLookAndFeelClassName());
 
         var ctx = new SpringApplicationBuilder(Application.class).headless(false).web(WebApplicationType.NONE)
@@ -51,7 +52,11 @@ public class Application extends JFrame {
         playButton.addActionListener((ActionEvent event) -> playerService.buttonClicked());
 
         var quitButton = new JButton("Quit");
-        quitButton.addActionListener((ActionEvent event) -> System.exit(0));
+        quitButton.addActionListener((ActionEvent event) -> {
+            playerService.stop();
+            log.info("See You Space Cowboy");
+            System.exit(0);
+        });
 
         var donateButton = new JButton("Donate");
         donateButton.addActionListener((ActionEvent event) -> openSomaFmDonateLinkInDefaultBrowser());
@@ -116,7 +121,6 @@ public class Application extends JFrame {
         try {
             Desktop desktop = Desktop.getDesktop();
             desktop.browse(uri);
-
         } catch (Exception ex) {
             log.error("Fallback: show info box");
             donationBox.setVisible(true);
