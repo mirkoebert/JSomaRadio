@@ -13,17 +13,16 @@ import java.util.prefs.Preferences;
 @Slf4j
 public class PlayerService {
 
-    private URL currenStationUrl;
-    private URL nextStationUrl;
-
-    private final Mp3StreamPlayer player;
-    private Preferences prefs = Preferences.userNodeForPackage(getClass());
+    private final StreamWatchdog player;
     private final StationService stationService;
     private final PlayListService playListService;
+    private URL currenStationUrl;
+    private URL nextStationUrl;
+    private Preferences prefs = Preferences.userNodeForPackage(getClass());
 
-    void buttonClicked(){
+    void buttonClicked() {
         log.info("play or stop");
-        if (currenStationUrl == null){
+        if (currenStationUrl == null) {
             currenStationUrl = stationService.getSelectedStationPlsUrl();
             log.info("Start station {}", currenStationUrl);
             final URL stream = playListService.getAudioStreamURL(currenStationUrl);
@@ -33,16 +32,16 @@ public class PlayerService {
         }
     }
 
-    void listItemSelected(int selectedIndex){
+    void listItemSelected(int selectedIndex) {
         log.info("listItemSelected {}", selectedIndex);
         nextStationUrl = stationService.getStationPlsUrl(selectedIndex);
-        if (currenStationUrl == null){
+        if (currenStationUrl == null) {
             log.info("Start station {}", nextStationUrl);
             URL stream = playListService.getAudioStreamURL(nextStationUrl);
             player.playStream(stream);
             currenStationUrl = nextStationUrl;
             stationService.setSelectedStationIndex(selectedIndex);
-        } else if (nextStationUrl.toString().equals(currenStationUrl.toString())){
+        } else if (nextStationUrl.toString().equals(currenStationUrl.toString())) {
             stop();
         } else {
             log.info("Switch to station {}", nextStationUrl);
@@ -62,7 +61,7 @@ public class PlayerService {
     }
 
     @PostConstruct
-    void preLoadLastPls(){
+    void preLoadLastPls() {
         // TODO put into a own thread to unblock gui    
         final URL preloadStationUrl = stationService.getSelectedStationPlsUrl();
         log.info("PostConstruct: preload latest station {} playlist for faster start", preloadStationUrl);

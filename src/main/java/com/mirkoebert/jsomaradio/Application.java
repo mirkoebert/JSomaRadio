@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.WebApplicationType;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.scheduling.annotation.EnableScheduling;
 
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
@@ -18,19 +19,19 @@ import java.util.Arrays;
 import static javax.swing.JOptionPane.INFORMATION_MESSAGE;
 
 @SpringBootApplication
+@EnableScheduling
 @Slf4j
 public class Application extends JFrame {
 
+    private final StationService stationService = new StationService();
     @Autowired
     private PlayerService playerService;
-    private final StationService stationService = new StationService();
-
     private JDialog donationBox;
     private JDialog aboutBox;
 
     public Application() {
         initUI();
-        log.info("Verion {}", getClass().getPackage().getImplementationVersion());
+        log.info("Version {}", getClass().getPackage().getImplementationVersion());
     }
 
     public static void main(String[] args) {
