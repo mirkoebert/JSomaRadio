@@ -1,5 +1,7 @@
 package com.mirkoebert.jsomaradio;
 
+import com.goxr3plus.streamplayer.enums.Status;
+import com.mirkoebert.jsomaradio.player.ResilientStreamPlayer;
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -13,58 +15,57 @@ import java.util.prefs.Preferences;
 @Slf4j
 public class PlayerService {
 
-    private final StreamWatchdog player;
+    private final ResilientStreamPlayer player;
     private final StationService stationService;
     private final PlayListService playListService;
-    private URL currenStationUrl;
-    private URL nextStationUrl;
     private Preferences prefs = Preferences.userNodeForPackage(getClass());
 
-    void buttonClicked() {
+    void playButtonClicked() {
         log.info("play or stop");
-        if (currenStationUrl == null) {
-            currenStationUrl = stationService.getSelectedStationPlsUrl();
+        if (player.getStatus() == Status.NOT_SPECIFIED) {
+            log.info("Start last station");
+            URL currenStationUrl = stationService.getSelectedStationPlsUrl();
             log.info("Start station {}", currenStationUrl);
             final URL stream = playListService.getAudioStreamURL(currenStationUrl);
             player.playStream(stream);
-        } else {
-            stop();
+        } else if (player.getStatus() == Status.PLAYING) {
+            log.info("Stop playing station");
+            player.stop();
         }
     }
 
     void listItemSelected(int selectedIndex) {
         log.info("listItemSelected {}", selectedIndex);
-        nextStationUrl = stationService.getStationPlsUrl(selectedIndex);
-        if (currenStationUrl == null) {
-            log.info("Start station {}", nextStationUrl);
-            URL stream = playListService.getAudioStreamURL(nextStationUrl);
-            player.playStream(stream);
-            currenStationUrl = nextStationUrl;
-            stationService.setSelectedStationIndex(selectedIndex);
-        } else if (nextStationUrl.toString().equals(currenStationUrl.toString())) {
-            stop();
-        } else {
-            log.info("Switch to station {}", nextStationUrl);
-            currenStationUrl = nextStationUrl;
-            URL stream = playListService.getAudioStreamURL(nextStationUrl);
-            player.stop();
-            player.playStream(stream);
-            stationService.setSelectedStationIndex(selectedIndex);
+        stationService.setSelectedStationIndex(selectedIndex);
+        URL nextStationUrl = stationService.getSelectedStationPlsUrl();
+        Status playStatus = player.getStatus();
+        switch (playStatus) {
+            case PLAYING -> {
+                log.info("Switching to other station {}", nextStationUrl);
+                player.stop();
+                URL stream = playListService.getAudioStreamURL(nextStationUrl);
+                player.playStream(stream);
+            }
+            case NOT_SPECIFIED, STOPPED -> {
+                log.info("Player is not playing. Just start new station {}", nextStationUrl);
+                URL stream = playListService.getAudioStreamURL(nextStationUrl);
+                player.playStream(stream);
+            }
+            default -> log.warn("unsopprted operation fpr player status {}", playStatus);
         }
+
     }
 
-    void stop() {
-        log.info("Stop station {}", currenStationUrl);
-        player.stop();
-        nextStationUrl = currenStationUrl;
-        currenStationUrl = null;
-    }
 
     @PostConstruct
     void preLoadLastPls() {
-        // TODO put into a own thread to unblock gui    
+        // TODO put into a own thread to unblock gui
         final URL preloadStationUrl = stationService.getSelectedStationPlsUrl();
-        log.info("PostConstruct: preload latest station {} playlist for faster start", preloadStationUrl);
+        log.info("PostConstruct: preload latest station {} playlist for faster first start", preloadStationUrl);
         playListService.getAudioStreamURL(preloadStationUrl);
+    }
+
+    public void shutDown() {
+        player.stop();
     }
 }

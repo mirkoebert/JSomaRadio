@@ -1,4 +1,4 @@
-package com.mirkoebert.jsomaradio;
+package com.mirkoebert.jsomaradio.player;
 
 import com.goxr3plus.streamplayer.enums.Status;
 import lombok.RequiredArgsConstructor;
@@ -13,13 +13,13 @@ import java.net.URL;
 @Service
 @RequiredArgsConstructor
 @Slf4j
-public class StreamWatchdog {
+public class ResilientStreamPlayer {
 
     private final Mp3StreamPlayer mp3StreamPlayer;
     private InputStream in;
     private URL audioStreamUrl;
-        
-    void playStream(final URL audioStreamUrl) {
+
+    public void playStream(final URL audioStreamUrl) {
         this.audioStreamUrl = audioStreamUrl;
         openNewPlayerWithNewStream();
     }
@@ -58,5 +58,9 @@ public class StreamWatchdog {
         } catch (IOException e) {
             log.warn("Can't close stream after stopping the player");
         }
+    }
+
+    public Status getStatus() {
+        return mp3StreamPlayer.getStatus();
     }
 }

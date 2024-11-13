@@ -49,11 +49,11 @@ public class Application extends JFrame {
 
     private void initUI() {
         var playButton = new JButton("Play");
-        playButton.addActionListener((ActionEvent event) -> playerService.buttonClicked());
+        playButton.addActionListener((ActionEvent event) -> playerService.playButtonClicked());
 
         var quitButton = new JButton("Quit");
         quitButton.addActionListener((ActionEvent event) -> {
-            playerService.stop();
+            playerService.shutDown();
             log.info("See You Space Cowboy");
             System.exit(0);
         });

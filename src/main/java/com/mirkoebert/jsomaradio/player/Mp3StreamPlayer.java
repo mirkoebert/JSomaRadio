@@ -1,4 +1,4 @@
-package com.mirkoebert.jsomaradio;
+package com.mirkoebert.jsomaradio.player;
 
 import com.goxr3plus.streamplayer.stream.StreamPlayer;
 import com.goxr3plus.streamplayer.stream.StreamPlayerEvent;
@@ -24,7 +24,6 @@ class Mp3StreamPlayer extends StreamPlayer implements StreamPlayerListener {
             play();
         } catch (Exception e) {
             log.error("Cant play stream", e);
-            //throw new RuntimeException(e);
         }
     }
 
@@ -41,11 +40,6 @@ class Mp3StreamPlayer extends StreamPlayer implements StreamPlayerListener {
     @Override
     public void statusUpdated(StreamPlayerEvent event) {
         log.info("Get StreamPlayerEvent: {}", event.toString());
-    }
-
-    @Override
-    public void stop() {
-        super.stop();
     }
 
 }

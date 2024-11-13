@@ -16,19 +16,23 @@ class PlayListService {
 
     private final Map<URL, URL> cache = new HashMap<>();
 
-    URL getAudioStreamURL(final URL selectedPlsUrl)  {
+    URL getAudioStreamURL(final URL selectedPlsUrl) {
         final URL cachedUrl = cache.get(selectedPlsUrl);
+
         if (cachedUrl == null) {
-            URL directUrl = getAudioStreamURLdirct(selectedPlsUrl);
+            log.info("Cache miss. Retrieve stream url for select Playlist URL {}", selectedPlsUrl);
+            final URL directUrl = getAudioStreamURLdirect(selectedPlsUrl);
             cache.put(selectedPlsUrl, directUrl);
+            log.info("Retrieved stream url {}", directUrl);
             return directUrl;
         }
+        log.info("Cache hit. Found stream url {} for playlist url {}", cachedUrl, selectedPlsUrl);
         return cachedUrl;
     }
 
-    private URL getAudioStreamURLdirct(final URL selectedPlsUrl)  {
+    private URL getAudioStreamURLdirect(final URL selectedPlsUrl) {
         try {
-            log.info("Get streaming URL from playlist");
+            log.info("Get stream URL from playlist {}", selectedPlsUrl);
             final SpecificPlaylist specificPlaylist = SpecificPlaylistFactory.getInstance().readFrom(selectedPlsUrl);
             specificPlaylist.toPlaylist().getRootSequence().getComponents().forEach(component -> {
                 if (component instanceof Media media) {
@@ -37,7 +41,8 @@ class PlayListService {
             });
             final Media first = (Media) specificPlaylist.toPlaylist().getRootSequence().getComponents().getFirst();
             return first.getSource().getURL();
-        } catch (Exception e){
+        } catch (Exception e) {
+            log.warn("Can't get stream url for playlist", e);
             return null;
         }
     }

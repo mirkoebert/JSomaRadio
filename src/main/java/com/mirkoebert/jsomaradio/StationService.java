@@ -17,8 +17,22 @@ class StationService {
     private static final String somaBaseUrl = "https://somafm.com/nossl/";
     private static final String plsExtension = ".pls";
     @Getter
-    private final String[] stationsNames = {"Beat Bender", "Black Rock FM", "Boot Liquor", "Bossa Beyond", "Chilitis Radio", "Christmas Lounge", "Groove Salad", "Drone Zone", "Deep Space One", "Indie Pop Rocks!", "Secret Agent", "PopTron"};
-    private final String[] stationsPls = {"beatblender", "brfm", "bootliquor", "bossa", "chillits", "christmas", "groovesalad", "dronezone", "deepspaceone", "indiepop", "secretagent", "poptron"};
+    private final String[] stationsNames = {
+            "Beat Bender", "Black Rock FM", "Boot Liquor", "Bossa Beyond",
+            "Chilitis Radio", "Christmas Lounge",
+            "Groove Salad",
+            "Drone Zone", "Deep Space One",
+            "Indie Pop Rocks!",
+            "Secret Agent",
+            "PopTron"};
+    private final String[] stationsPls = {
+            "beatblender", "brfm", "bootliquor", "bossa",
+            "chillits", "christmas",
+            "groovesalad",
+            "dronezone", "deepspaceone",
+            "indiepop",
+            "secretagent",
+            "poptron"};
 
     private Preferences prefs = Preferences.userNodeForPackage(getClass());
     @Getter
@@ -38,11 +52,12 @@ class StationService {
         prefs.putInt("selectedStationIndex", i);
     }
 
-    public URL getStationPlsUrl(int i) {
+    private URL getStationPlsUrl(int i) {
         try {
             return new URI(somaBaseUrl + stationsPls[i] + plsExtension).toURL();
         } catch (MalformedURLException | URISyntaxException e) {
-            throw new RuntimeException(e);
+            log.error("Can't build station url for index {}", i);
+            throw new RuntimeException("Can't build station url for index", e);
         }
     }
 }
