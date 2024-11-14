@@ -50,6 +50,7 @@ class StationService {
 
     void setSelectedStationIndex(int i) {
         prefs.putInt("selectedStationIndex", i);
+        selectedStationIndex = i;
     }
 
     private URL getStationPlsUrl(int i) {

@@ -22,24 +22,29 @@ public class PlayerService {
 
     void playButtonClicked() {
         log.info("play or stop");
-        if (player.getStatus() == Status.NOT_SPECIFIED) {
-            log.info("Start last station");
-            URL currenStationUrl = stationService.getSelectedStationPlsUrl();
-            log.info("Start station {}", currenStationUrl);
-            final URL stream = playListService.getAudioStreamURL(currenStationUrl);
-            player.playStream(stream);
-        } else if (player.getStatus() == Status.PLAYING) {
-            log.info("Stop playing station");
-            player.stop();
+        final Status playerStatus = player.getStatus();
+        switch (playerStatus) {
+            case PLAYING -> {
+                log.info("Stop");
+                player.stop();
+            }
+            case NOT_SPECIFIED, STOPPED -> {
+                log.info("Start last station");
+                URL currenStationUrl = stationService.getSelectedStationPlsUrl();
+                log.info("Start station {}", currenStationUrl);
+                final URL stream = playListService.getAudioStreamURL(currenStationUrl);
+                player.playStream(stream);
+            }
+            default -> log.warn("Not supported operation for player status {}", playerStatus);
         }
     }
 
     void listItemSelected(int selectedIndex) {
         log.info("listItemSelected {}", selectedIndex);
         stationService.setSelectedStationIndex(selectedIndex);
-        URL nextStationUrl = stationService.getSelectedStationPlsUrl();
-        Status playStatus = player.getStatus();
-        switch (playStatus) {
+        final URL nextStationUrl = stationService.getSelectedStationPlsUrl();
+        final Status playerStatus = player.getStatus();
+        switch (playerStatus) {
             case PLAYING -> {
                 log.info("Switching to other station {}", nextStationUrl);
                 player.stop();
@@ -51,7 +56,7 @@ public class PlayerService {
                 URL stream = playListService.getAudioStreamURL(nextStationUrl);
                 player.playStream(stream);
             }
-            default -> log.warn("unsopprted operation fpr player status {}", playStatus);
+            default -> log.warn("unsopprted operation for player status {}", playerStatus);
         }
 
     }
