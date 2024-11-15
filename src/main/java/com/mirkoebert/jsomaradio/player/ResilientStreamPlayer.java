@@ -26,19 +26,29 @@ public class ResilientStreamPlayer {
 
     @Scheduled(fixedRate = 2000)
     void watchDog() {
-        if (mp3StreamPlayer.getStatus() == Status.PLAYING) {
-            try {
-                if (in == null) {
-                    log.warn("In stream is null");
-                } else if (in.available() > 0) {
-                    log.debug("In stream is ok");
-                } else {
-                    log.warn("In stream is not ok");
-                    openNewPlayerWithNewStream();
+        final Status playerStatus = mp3StreamPlayer.getStatus();
+        switch (playerStatus) {
+            case PLAYING, PAUSED -> {
+                try {
+                    if (in == null) {
+                        log.warn("In stream is null");
+                    } else if (in.available() > 0) {
+                        log.debug("In stream is ok");
+                    } else {
+                        log.warn("In stream is not ok");
+                        openNewPlayerWithNewStream();
+                    }
+                } catch (IOException e) {
+                    log.warn("Can't determine stream {}", e.getMessage());
                 }
-            } catch (IOException e) {
-                log.warn("Can't determine stream {}", e.getMessage());
             }
+            case STOPPED -> {
+                log.info("Player state STOPPED, nothing to do");
+            }
+            default -> {
+                log.info("Unsupported player state {}", playerStatus);
+            }
+
         }
     }
 
