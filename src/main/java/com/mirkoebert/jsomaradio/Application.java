@@ -32,6 +32,10 @@ public class Application extends JFrame {
     public Application() {
         initUI();
         log.info("Version {}", getClass().getPackage().getImplementationVersion());
+        Thread stopPlayerHook = new Thread(() -> {
+            playerService.shutDown();
+        });
+        Runtime.getRuntime().addShutdownHook(stopPlayerHook);
     }
 
     public static void main(String[] args) {
@@ -53,8 +57,7 @@ public class Application extends JFrame {
 
         var quitButton = new JButton("Quit");
         quitButton.addActionListener((ActionEvent event) -> {
-            playerService.shutDown();
-            log.info("See You Space Cowboy");
+            //playerService.shutDown();
             System.exit(0);
         });
 

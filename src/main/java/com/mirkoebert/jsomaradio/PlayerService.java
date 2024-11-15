@@ -71,6 +71,7 @@ public class PlayerService {
     }
 
     public void shutDown() {
+        log.info("See You Space Cowboy");
         player.stop();
     }
 }

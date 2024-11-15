@@ -42,12 +42,8 @@ public class ResilientStreamPlayer {
                     log.warn("Can't determine stream {}", e.getMessage());
                 }
             }
-            case STOPPED, NOT_SPECIFIED -> {
-                log.debug("Player state {]}, nothing to do", playerStatus);
-            }
-            default -> {
-                log.info("Unsupported player state {}", playerStatus);
-            }
+            case STOPPED, NOT_SPECIFIED -> log.debug("Player state {}, nothing to do", playerStatus);
+            default -> log.info("Unsupported player state {}", playerStatus);
 
         }
     }
