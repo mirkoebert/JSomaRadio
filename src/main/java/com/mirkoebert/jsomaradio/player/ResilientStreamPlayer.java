@@ -42,8 +42,8 @@ public class ResilientStreamPlayer {
                     log.warn("Can't determine stream {}", e.getMessage());
                 }
             }
-            case STOPPED -> {
-                log.info("Player state STOPPED, nothing to do");
+            case STOPPED, NOT_SPECIFIED -> {
+                log.debug("Player state {]}, nothing to do", playerStatus);
             }
             default -> {
                 log.info("Unsupported player state {}", playerStatus);
@@ -65,7 +65,7 @@ public class ResilientStreamPlayer {
         mp3StreamPlayer.stop();
         try {
             in.close();
-        } catch (IOException e) {
+        } catch (Exception e) {
             log.warn("Can't close stream after stopping the player");
         }
     }
