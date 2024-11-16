@@ -32,9 +32,7 @@ public class Application extends JFrame {
     public Application() {
         initUI();
         log.info("Version {}", getClass().getPackage().getImplementationVersion());
-        Thread stopPlayerHook = new Thread(() -> {
-            playerService.shutDown();
-        });
+        Thread stopPlayerHook = new Thread(() -> playerService.shutDown());
         Runtime.getRuntime().addShutdownHook(stopPlayerHook);
     }
 
@@ -56,10 +54,7 @@ public class Application extends JFrame {
         playButton.addActionListener((ActionEvent event) -> playerService.playButtonClicked());
 
         var quitButton = new JButton("Quit");
-        quitButton.addActionListener((ActionEvent event) -> {
-            //playerService.shutDown();
-            System.exit(0);
-        });
+        quitButton.addActionListener((ActionEvent event) -> System.exit(0));
 
         var donateButton = new JButton("Donate");
         donateButton.addActionListener((ActionEvent event) -> openSomaFmDonateLinkInDefaultBrowser());

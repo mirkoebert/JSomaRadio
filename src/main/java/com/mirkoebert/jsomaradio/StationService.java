@@ -19,17 +19,21 @@ class StationService {
     @Getter
     private final String[] stationsNames = {
             "Beat Bender", "Black Rock FM", "Boot Liquor", "Bossa Beyond",
-            "Chilitis Radio", "Christmas Lounge",
-            "Groove Salad",
-            "Drone Zone", "Deep Space One",
+            "Chilitis Radio", "Christmas Lounge", "Christmas Rocks!", "cliqhop idm",
+            "Covers", "Deep Space One", "DEF CON Radio", "Department Store Christmas (Special)",
+            "Digitalis", "Doomed", "Drone Zone", "Dub Step Beyond",
+            "Fluid", "Folk Forward", "Groove Salad",
+
             "Indie Pop Rocks!",
             "Secret Agent",
             "PopTron"};
     private final String[] stationsPls = {
             "beatblender", "brfm", "bootliquor", "bossa",
-            "chillits", "christmas",
-            "groovesalad",
-            "dronezone", "deepspaceone",
+            "chillits", "christmas", "xmasrocks", "clinqhop",
+            "covers", "deepspaceone", "defcon", "deptstore",
+            "digitalis", "doomed", "dronezone", "dubstep",
+            "fluid", "folkfwd", "groovesalad",
+
             "indiepop",
             "secretagent",
             "poptron"};
