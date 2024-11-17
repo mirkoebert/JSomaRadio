@@ -24,10 +24,11 @@ class StationService {
             "Digitalis", "Doomed", "Drone Zone", "Dub Step Beyond",
             "Fluid", "Folk Forward", "Groove Salad", "Groove Salad Classic",
             "Heavyweight Reggae", "Illinois Street Lounge", "Indie Pop Rocks!", "Jolly Ol' Soul",
-            "Left Coast 70s",
+            "Left Coast 70s", "Lush", "Metal Detector", "Mission Control",
+            "n5MD Radio", "PopTron", "Secret Agent", "Seven Inch Soul",
+            "SF 10-33"
 
-            "Secret Agent",
-            "PopTron"};
+    };
     private final String[] stationsPls = {
             "beatblender", "brfm", "bootliquor", "bossa",
             "chillits", "christmas", "xmasrocks", "clinqhop",
@@ -35,10 +36,11 @@ class StationService {
             "digitalis", "doomed", "dronezone", "dubstep",
             "fluid", "folkfwd", "groovesalad", "gsclassic",
             "reaggae", "illstreet", "indiepop", "jollysoul",
-            "seventies",
+            "seventies", "lush", "metal", "missioncontrol",
+            "n5md", "poptron", "secretagent", "7soul",
+            "sf1033"
 
-            "secretagent",
-            "poptron"};
+    };
 
     private Preferences prefs = Preferences.userNodeForPackage(getClass());
     @Getter

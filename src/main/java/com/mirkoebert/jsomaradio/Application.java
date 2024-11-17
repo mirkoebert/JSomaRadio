@@ -37,7 +37,7 @@ public class Application extends JFrame {
     }
 
     public static void main(String[] args) {
-        log.info("Welcome on Board of te Bebop");
+        log.info("Welcome on Board of the Bebop");
         log.info("LookAndFeelClassName {}", UIManager.getSystemLookAndFeelClassName());
 
         var ctx = new SpringApplicationBuilder(Application.class).headless(false).web(WebApplicationType.NONE)
@@ -70,7 +70,8 @@ public class Application extends JFrame {
             }
 
         });
-        createLayout(stationList, quitButton, playButton, donateButton, aboutButton);
+        JScrollPane jsp = new JScrollPane(stationList);
+        createLayout(jsp, quitButton, playButton, donateButton, aboutButton);
 
         setTitle("J Soma Radio");
         setSize(500, 500);
