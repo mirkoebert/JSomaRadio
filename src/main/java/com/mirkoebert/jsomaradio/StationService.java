@@ -22,9 +22,10 @@ class StationService {
             "Chilitis Radio", "Christmas Lounge", "Christmas Rocks!", "cliqhop idm",
             "Covers", "Deep Space One", "DEF CON Radio", "Department Store Christmas (Special)",
             "Digitalis", "Doomed", "Drone Zone", "Dub Step Beyond",
-            "Fluid", "Folk Forward", "Groove Salad",
+            "Fluid", "Folk Forward", "Groove Salad", "Groove Salad Classic",
+            "Heavyweight Reggae", "Illinois Street Lounge", "Indie Pop Rocks!", "Jolly Ol' Soul",
+            "Left Coast 70s",
 
-            "Indie Pop Rocks!",
             "Secret Agent",
             "PopTron"};
     private final String[] stationsPls = {
@@ -32,9 +33,10 @@ class StationService {
             "chillits", "christmas", "xmasrocks", "clinqhop",
             "covers", "deepspaceone", "defcon", "deptstore",
             "digitalis", "doomed", "dronezone", "dubstep",
-            "fluid", "folkfwd", "groovesalad",
+            "fluid", "folkfwd", "groovesalad", "gsclassic",
+            "reaggae", "illstreet", "indiepop", "jollysoul",
+            "seventies",
 
-            "indiepop",
             "secretagent",
             "poptron"};
 
