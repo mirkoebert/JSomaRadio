@@ -33,7 +33,8 @@ public class ResilientStreamPlayer {
                     if (in == null) {
                         log.warn("In stream is null");
                     } else if (in.available() > 0) {
-                        log.debug("In stream is ok");
+                        log.debug("In stream is ok: {}", in.available());
+                        // TODO use a 'magic eye tube' input
                     } else {
                         log.warn("In stream is not ok");
                         openNewPlayerWithNewStream();
@@ -44,7 +45,6 @@ public class ResilientStreamPlayer {
             }
             case STOPPED, NOT_SPECIFIED -> log.debug("Player state {}, nothing to do", playerStatus);
             default -> log.info("Unsupported player state {}", playerStatus);
-
         }
     }
 

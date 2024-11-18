@@ -1,10 +1,10 @@
 id: com.mirkoebert.JSomaRadio
 runtime: org.freedesktop.Platform
-runtime-version: '23.08'
+runtime-version: '24.08'
 sdk: org.freedesktop.Sdk
-sdk-extensions:  
+sdk-extensions:
   - org.freedesktop.Sdk.Extension.openjdk
-command: jsoma 
+command: jsoma
 finish-args:
   - --device=dri
   - --env=PATH=/app/bin:/app/jre/bin:/usr/bin

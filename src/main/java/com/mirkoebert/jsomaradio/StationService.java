@@ -26,8 +26,11 @@ class StationService {
             "Heavyweight Reggae", "Illinois Street Lounge", "Indie Pop Rocks!", "Jolly Ol' Soul",
             "Left Coast 70s", "Lush", "Metal Detector", "Mission Control",
             "n5MD Radio", "PopTron", "Secret Agent", "Seven Inch Soul",
-            "SF 10-33"
-
+            "SF 10-33", "SF in SF", "SF Police Scanner", "SomaFM Live",
+            "SomaFM Specials", "Sonic Universe", "Space Station Soma", "Suburbs of Goa",
+            "Synphaera Radio", "The Dark Zone", "The In-Sound (Special)", "The Trip",
+            "ThistleRadio", "Tiki Time (Special)", "Underground 80s", "Vaporwaves",
+            "Xmas in Frisko"
     };
     private final String[] stationsPls = {
             "beatblender", "brfm", "bootliquor", "bossa",
@@ -38,8 +41,11 @@ class StationService {
             "reaggae", "illstreet", "indiepop", "jollysoul",
             "seventies", "lush", "metal", "missioncontrol",
             "n5md", "poptron", "secretagent", "7soul",
-            "sf1033"
-
+            "sf1033", "sfinsf", "scanner", "live",
+            "specials", "sonicuniverse", "spacestation", "suburbsofgoa",
+            "synphaera", "darkzone", "insound", "thetrip",
+            "thistle", "tikitime", "u80s", "vaporwaves",
+            "xmasinfrisko"
     };
 
     private Preferences prefs = Preferences.userNodeForPackage(getClass());
