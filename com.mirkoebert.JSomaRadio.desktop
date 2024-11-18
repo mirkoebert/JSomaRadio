@@ -1,10 +1,10 @@
 [Desktop Entry]
 Type=Application
-Name=JSomaRAdio
+Name=JSomaRadio
 Comment=Simple Radio
 Icon=org.eclipse.Java
 Exec=eclipse %f
 Terminal=false
-Categories=Audio;Music;Player;AudioVideo;GNOME;GTK;
+Categories=Audio;Music;Player;AudioVideo;
 Keywords=Radio;Audio;Music;Player;
 X-Purism-FormFactor=Workstation;Mobile;
