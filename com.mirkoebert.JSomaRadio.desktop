@@ -7,4 +7,3 @@ Exec=eclipse %f
 Terminal=false
 Categories=Audio;Music;Player;AudioVideo;
 Keywords=Radio;Audio;Music;Player;
-X-Purism-FormFactor=Workstation;Mobile;
