@@ -17,15 +17,15 @@ It's a hobby project. It's for me hearing Soma FM where ever I be.
 
 mvn clean package
 
-java -jar target/jsomaradio.jar
+java -jar target/simple-java-radio-player.jar
 
 ### Flatpack
 
 flatpak-builder --force-clean --user --install-deps-from=flathub --repo=repo --install builddir
-com.mirkoebert.JSomaRadio.yml
+com.mirkoebert.simple-java-radio-player.yml
 
-flatpak run com.mirkoebert.JSomaRadio
+flatpak run com.mirkoebert.simple-java-radio-player
 
 Check flatpack build manifest   
-flatpak run --command=flatpak-builder-lint org.flatpak.Builder appstream JSomaRadio.metainfo.xml
+flatpak run --command=flatpak-builder-lint org.flatpak.Builder appstream simple-java-radio-player.metainfo.xml
 

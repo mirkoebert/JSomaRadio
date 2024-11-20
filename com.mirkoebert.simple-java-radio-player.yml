@@ -1,4 +1,4 @@
-id: com.mirkoebert.JSomaRadio
+id: com.mirkoebert.simple-java-radio-player
 runtime: org.freedesktop.Platform
 runtime-version: '24.08'
 sdk: org.freedesktop.Sdk
@@ -18,7 +18,7 @@ modules:
     buildsystem: simple
     build-commands:
       - /usr/lib/sdk/openjdk/install.sh
-  - name: jsomaradio
+  - name: simple-java-radio-player
     buildsystem: simple
     build-commands:
       - install -Dm755 simple-java-radio-player.sh /app/bin/simple-java-radio-player

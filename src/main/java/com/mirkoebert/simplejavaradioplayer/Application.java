@@ -24,11 +24,11 @@ import static javax.swing.JOptionPane.INFORMATION_MESSAGE;
 public class Application extends JFrame {
 
     private final StationService stationService = new StationService();
+    private final String nameAndVersion;
     @Autowired
     private PlayerService playerService;
     private JDialog donationBox;
     private JDialog aboutBox;
-    private String nameAndVersion = "";
 
     public Application() {
         nameAndVersion = getClass().getPackage().getImplementationTitle() + " " + getClass().getPackage().getImplementationVersion();
@@ -40,7 +40,6 @@ public class Application extends JFrame {
 
     public static void main(String[] args) {
         log.info("Welcome on Board of the Bebop");
-        log.info("LookAndFeelClassName {}", UIManager.getSystemLookAndFeelClassName());
 
         var ctx = new SpringApplicationBuilder(Application.class).headless(false).web(WebApplicationType.NONE)
                 .run(args);
@@ -108,7 +107,7 @@ public class Application extends JFrame {
         val pane1 = new JOptionPane("Please support Soma FM and go to https://somafm.com/support/", INFORMATION_MESSAGE);
         donationBox = pane1.createDialog(pane, "Donate");
 
-        val pane2 = new JOptionPane(nameAndVersion + "\nhttps://github.com/mirkoebert/JSomaRadio", INFORMATION_MESSAGE);
+        val pane2 = new JOptionPane(nameAndVersion + "\nhttps://github.com/mirkoebert/SimpleJavaRadioPlayerForSomaFM", INFORMATION_MESSAGE);
         aboutBox = pane2.createDialog(pane, "About");
     }
 
@@ -123,7 +122,7 @@ public class Application extends JFrame {
             Desktop desktop = Desktop.getDesktop();
             desktop.browse(uri);
         } catch (Exception ex) {
-            log.error("Fallback: show info box");
+            log.warn("Fallback: show info box");
             donationBox.setVisible(true);
         }
     }
