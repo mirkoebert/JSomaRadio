@@ -1,11 +1,13 @@
-# JSomaRadio
+# Simple Java Radio Player for Soma FM
 
-Simple Java Soma FM Radio player
+This software is not associated with Soma FM.
+It's a hobby project. It's for me hearing Soma FM where ever I be.
 
 - Plays Soma FM stations
 - Soma Station list configured
 - Inspired from Soma Radio from Alex Kryuchkov
 - Based on goxr3plus Java stream player
+- Resilient against
 
 ![](Screenshot_20241119_221244.png "Screenshot")
 
