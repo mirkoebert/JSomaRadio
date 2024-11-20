@@ -1,4 +1,4 @@
-package com.mirkoebert.jsomaradio;
+package com.mirkoebert.simplejavaradioplayer;
 
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;

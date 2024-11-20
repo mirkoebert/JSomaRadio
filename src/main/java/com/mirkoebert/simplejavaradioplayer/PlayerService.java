@@ -1,7 +1,7 @@
-package com.mirkoebert.jsomaradio;
+package com.mirkoebert.simplejavaradioplayer;
 
 import com.goxr3plus.streamplayer.enums.Status;
-import com.mirkoebert.jsomaradio.player.ResilientStreamPlayer;
+import com.mirkoebert.simplejavaradioplayer.player.ResilientStreamPlayer;
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

@@ -4,7 +4,7 @@ runtime-version: '24.08'
 sdk: org.freedesktop.Sdk
 sdk-extensions:
   - org.freedesktop.Sdk.Extension.openjdk
-command: jsoma
+command: simple-java-radio-player
 finish-args:
   - --device=dri
   - --env=PATH=/app/bin:/app/jre/bin:/usr/bin
@@ -21,13 +21,13 @@ modules:
   - name: jsomaradio
     buildsystem: simple
     build-commands:
-      - install -Dm755 jsoma.sh /app/bin/jsoma
-      - install -Dm644 jsomaradio.jar /app/bin/jsomaradio.jar
+      - install -Dm755 simple-java-radio-player.sh /app/bin/simple-java-radio-player
+      - install -Dm644 simple-java-radio-player.jar /app/bin/simple-java-radio-player.jar
     sources:
       - type: file
-        path: target/jsomaradio.jar
+        path: target/simple-java-radio-player.jar
       - type: script
-        dest-filename: jsoma.sh
+        dest-filename: simple-java-radio-player.sh
         commands:
-          - java -jar /app/bin/jsomaradio.jar
+          - java -jar /app/bin/simple-java-radio-player.jar
 

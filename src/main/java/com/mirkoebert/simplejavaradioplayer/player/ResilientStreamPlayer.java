@@ -1,4 +1,4 @@
-package com.mirkoebert.jsomaradio.player;
+package com.mirkoebert.simplejavaradioplayer.player;
 
 import com.goxr3plus.streamplayer.enums.Status;
 import lombok.RequiredArgsConstructor;

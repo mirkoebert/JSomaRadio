@@ -1,4 +1,4 @@
-package com.mirkoebert.jsomaradio;
+package com.mirkoebert.simplejavaradioplayer;
 
 import lombok.extern.slf4j.Slf4j;
 import lombok.val;
@@ -73,7 +73,7 @@ public class Application extends JFrame {
         JScrollPane jsp = new JScrollPane(stationList);
         createLayout(jsp, quitButton, playButton, donateButton, aboutButton);
 
-        setTitle("J Soma Radio");
+        setTitle("Simple Java Radio Player for Soma FM");
         setSize(500, 500);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(EXIT_ON_CLOSE);

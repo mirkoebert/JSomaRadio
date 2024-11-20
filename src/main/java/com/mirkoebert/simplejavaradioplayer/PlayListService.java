@@ -1,4 +1,4 @@
-package com.mirkoebert.jsomaradio;
+package com.mirkoebert.simplejavaradioplayer;
 
 import io.github.borewit.lizzy.playlist.Media;
 import io.github.borewit.lizzy.playlist.SpecificPlaylist;

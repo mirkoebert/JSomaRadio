@@ -1,4 +1,4 @@
-package com.mirkoebert.jsomaradio;
+package com.mirkoebert.simplejavaradioplayer;
 
 import org.junit.jupiter.api.Test;
 

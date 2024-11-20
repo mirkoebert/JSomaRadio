@@ -1,4 +1,4 @@
-package com.mirkoebert.jsomaradio.player;
+package com.mirkoebert.simplejavaradioplayer.player;
 
 import com.goxr3plus.streamplayer.stream.StreamPlayer;
 import com.goxr3plus.streamplayer.stream.StreamPlayerEvent;
