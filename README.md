@@ -7,7 +7,7 @@ It's a hobby project. It's for me hearing Soma FM where ever I be.
 - Soma Station list configured
 - Inspired from Soma Radio from Alex Kryuchkov
 - Based on goxr3plus Java stream player
-- Resilient against
+- Resilient against broken streams
 
 ![](Screenshot_20241119_221244.png "Screenshot")
 

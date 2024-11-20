@@ -1,7 +1,7 @@
 [Desktop Entry]
 Type=Application
-Name=JSomaRadio
-Comment=Simple Radio
+Name=Simple Java Radio Player
+Comment=Simple Java Radio Player for Soma FM
 Icon=org.eclipse.Java
 Exec=eclipse %f
 Terminal=false

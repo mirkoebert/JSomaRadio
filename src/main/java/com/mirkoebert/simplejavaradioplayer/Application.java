@@ -28,10 +28,12 @@ public class Application extends JFrame {
     private PlayerService playerService;
     private JDialog donationBox;
     private JDialog aboutBox;
+    private String nameAndVersion = "";
 
     public Application() {
+        nameAndVersion = getClass().getPackage().getImplementationTitle() + " " + getClass().getPackage().getImplementationVersion();
         initUI();
-        log.info("Version {}", getClass().getPackage().getImplementationVersion());
+        log.info(nameAndVersion);
         Thread stopPlayerHook = new Thread(() -> playerService.shutDown());
         Runtime.getRuntime().addShutdownHook(stopPlayerHook);
     }
@@ -73,7 +75,7 @@ public class Application extends JFrame {
         JScrollPane jsp = new JScrollPane(stationList);
         createLayout(jsp, quitButton, playButton, donateButton, aboutButton);
 
-        setTitle("Simple Java Radio Player for Soma FM");
+        setTitle(getClass().getPackage().getImplementationTitle());
         setSize(500, 500);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -106,7 +108,7 @@ public class Application extends JFrame {
         val pane1 = new JOptionPane("Please support Soma FM and go to https://somafm.com/support/", INFORMATION_MESSAGE);
         donationBox = pane1.createDialog(pane, "Donate");
 
-        val pane2 = new JOptionPane("J Soma Radio \nhttps://github.com/mirkoebert/JSomaRadio", INFORMATION_MESSAGE);
+        val pane2 = new JOptionPane(nameAndVersion + "\nhttps://github.com/mirkoebert/JSomaRadio", INFORMATION_MESSAGE);
         aboutBox = pane2.createDialog(pane, "About");
     }
 

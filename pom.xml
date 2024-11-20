@@ -11,7 +11,7 @@
     <groupId>com.mirkoebert</groupId>
     <artifactId>simple-java-radio-player</artifactId>
     <version>0.2.0-SNAPSHOT</version>
-    <name>simplejavaradioplayer</name>
+    <name>Simple Java Radio Player for Soma FM</name>
     <description>Simple Java Radio Player for Soma FM</description>
     <url/>
     <licenses>
