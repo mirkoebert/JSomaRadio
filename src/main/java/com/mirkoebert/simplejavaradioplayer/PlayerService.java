@@ -8,12 +8,13 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.net.URL;
+import java.util.Observable;
 import java.util.prefs.Preferences;
 
 @Service
 @RequiredArgsConstructor
 @Slf4j
-public class PlayerService {
+public class PlayerService extends Observable {
 
     private final ResilientStreamPlayer player;
     private final StationService stationService;
@@ -26,10 +27,12 @@ public class PlayerService {
         switch (playerStatus) {
             case PLAYING -> {
                 log.info("Stop");
+                setStatus("Player stoped");
                 player.stop();
             }
             case NOT_SPECIFIED, STOPPED -> {
                 log.info("Start last station");
+                setStatus("Player started with last station: " + stationService.getStationsNames()[stationService.getSelectedStationIndex()]);
                 URL currenStationUrl = stationService.getSelectedStationPlsUrl();
                 log.info("Start station {}", currenStationUrl);
                 final URL stream = playListService.getAudioStreamURL(currenStationUrl);
@@ -41,6 +44,7 @@ public class PlayerService {
 
     void listItemSelected(int selectedIndex) {
         log.info("listItemSelected {}", selectedIndex);
+        setStatus("Play station: " + stationService.getStationsNames()[selectedIndex]);
         stationService.setSelectedStationIndex(selectedIndex);
         final URL nextStationUrl = stationService.getSelectedStationPlsUrl();
         final Status playerStatus = player.getStatus();
@@ -56,7 +60,7 @@ public class PlayerService {
                 URL stream = playListService.getAudioStreamURL(nextStationUrl);
                 player.playStream(stream);
             }
-            default -> log.warn("unsopprted operation for player status {}", playerStatus);
+            default -> log.warn("unsupported operation for player status {}", playerStatus);
         }
 
     }
@@ -73,5 +77,10 @@ public class PlayerService {
     public void shutDown() {
         log.info("See You Space Cowboy");
         player.stop();
+    }
+
+    public void setStatus(String status) {
+        setChanged();
+        notifyObservers(status);
     }
 }

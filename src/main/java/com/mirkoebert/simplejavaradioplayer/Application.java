@@ -1,5 +1,6 @@
 package com.mirkoebert.simplejavaradioplayer;
 
+import jakarta.annotation.PostConstruct;
 import lombok.extern.slf4j.Slf4j;
 import lombok.val;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +26,7 @@ public class Application extends JFrame {
 
     private final StationService stationService = new StationService();
     private final String nameAndVersion;
+    private final StatusLine statusLine = new StatusLine();
     @Autowired
     private PlayerService playerService;
     private JDialog donationBox;
@@ -104,6 +106,8 @@ public class Application extends JFrame {
         main.setPreferredSize(new Dimension(350, 400));
         pane.add(lp, BorderLayout.CENTER);
 
+        pane.add(statusLine, BorderLayout.SOUTH);
+
         val pane1 = new JOptionPane("Please support Soma FM and go to https://somafm.com/support/", INFORMATION_MESSAGE);
         donationBox = pane1.createDialog(pane, "Donate");
 
@@ -127,4 +131,8 @@ public class Application extends JFrame {
         }
     }
 
+    @PostConstruct
+    void registerObserver() {
+        playerService.addObserver(statusLine);
+    }
 }
