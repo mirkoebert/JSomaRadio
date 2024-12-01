@@ -32,6 +32,7 @@ class StationService {
             "ThistleRadio", "Tiki Time (Special)", "Underground 80s", "Vaporwaves",
             "Xmas in Frisko"
     };
+    @Getter
     private final String[] stationsPls = {
             "beatblender", "brfm", "bootliquor", "bossa",
             "chillits", "christmas", "xmasrocks", "clinqhop",
@@ -67,12 +68,16 @@ class StationService {
         selectedStationIndex = i;
     }
 
-    private URL getStationPlsUrl(int i) {
+    URL getStationPlsUrl(int i) {
+        return getStationPlsUrl(stationsPls[i]);
+    }
+
+    URL getStationPlsUrl(final String station) {
         try {
-            return new URI(somaBaseUrl + stationsPls[i] + plsExtension).toURL();
+            return new URI(somaBaseUrl + station + plsExtension).toURL();
         } catch (MalformedURLException | URISyntaxException e) {
-            log.error("Can't build station url for index {}", i);
-            throw new RuntimeException("Can't build station url for index", e);
+            log.error("Can't build station url for {}", station);
+            throw new RuntimeException("Can't build station url", e);
         }
     }
 }

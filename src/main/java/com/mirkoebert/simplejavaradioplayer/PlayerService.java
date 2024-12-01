@@ -35,8 +35,7 @@ public class PlayerService extends Observable {
                 setStatus("Player started with last station: " + stationService.getStationsNames()[stationService.getSelectedStationIndex()]);
                 URL currenStationUrl = stationService.getSelectedStationPlsUrl();
                 log.info("Start station {}", currenStationUrl);
-                final URL stream = playListService.getAudioStreamURL(currenStationUrl);
-                player.playStream(stream);
+                play(currenStationUrl);
             }
             default -> log.warn("Not supported operation for player status {}", playerStatus);
         }
@@ -52,17 +51,20 @@ public class PlayerService extends Observable {
             case PLAYING -> {
                 log.info("Switching to other station {}", nextStationUrl);
                 player.stop();
-                URL stream = playListService.getAudioStreamURL(nextStationUrl);
-                player.playStream(stream);
+                play(nextStationUrl);
             }
             case NOT_SPECIFIED, STOPPED -> {
                 log.info("Player is not playing. Just start new station {}", nextStationUrl);
-                URL stream = playListService.getAudioStreamURL(nextStationUrl);
-                player.playStream(stream);
+                play(nextStationUrl);
             }
             default -> log.warn("unsupported operation for player status {}", playerStatus);
         }
 
+    }
+
+    private void play(final URL nextStationUrl) {
+        final URL stream = playListService.getAudioStreamURL(nextStationUrl);
+        player.playStream(stream);
     }
 
 
