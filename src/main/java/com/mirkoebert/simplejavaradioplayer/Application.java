@@ -1,5 +1,7 @@
 package com.mirkoebert.simplejavaradioplayer;
 
+import com.mirkoebert.simplejavaradioplayer.player.PlayerService;
+import com.mirkoebert.simplejavaradioplayer.player.StationService;
 import jakarta.annotation.PostConstruct;
 import lombok.extern.slf4j.Slf4j;
 import lombok.val;

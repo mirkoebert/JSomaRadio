@@ -1,4 +1,4 @@
-package com.mirkoebert.simplejavaradioplayer;
+package com.mirkoebert.simplejavaradioplayer.player;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

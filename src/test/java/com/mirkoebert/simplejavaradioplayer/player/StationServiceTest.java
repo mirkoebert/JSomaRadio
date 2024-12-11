@@ -1,4 +1,4 @@
-package com.mirkoebert.simplejavaradioplayer;
+package com.mirkoebert.simplejavaradioplayer.player;
 
 import org.junit.jupiter.api.Test;
 

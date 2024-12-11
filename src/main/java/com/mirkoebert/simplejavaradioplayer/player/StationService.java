@@ -1,4 +1,4 @@
-package com.mirkoebert.simplejavaradioplayer;
+package com.mirkoebert.simplejavaradioplayer.player;
 
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
@@ -12,7 +12,7 @@ import java.util.prefs.Preferences;
 
 @Service
 @Slf4j
-class StationService {
+public class StationService {
 
     private static final String somaBaseUrl = "https://somafm.com/nossl/";
     private static final String plsExtension = ".pls";
@@ -53,7 +53,7 @@ class StationService {
     @Getter
     private int selectedStationIndex;
 
-    StationService() {
+    public StationService() {
         selectedStationIndex = prefs.getInt("selectedStationIndex", 0);
         log.info("Restore last select station index {}", selectedStationIndex);
     }

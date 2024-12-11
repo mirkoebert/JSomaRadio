@@ -1,7 +1,6 @@
-package com.mirkoebert.simplejavaradioplayer;
+package com.mirkoebert.simplejavaradioplayer.player;
 
 import com.goxr3plus.streamplayer.enums.Status;
-import com.mirkoebert.simplejavaradioplayer.player.ResilientStreamPlayer;
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -21,13 +20,13 @@ public class PlayerService extends Observable {
     private final PlayListService playListService;
     private Preferences prefs = Preferences.userNodeForPackage(getClass());
 
-    void playButtonClicked() {
+    public void playButtonClicked() {
         log.info("play or stop");
         final Status playerStatus = player.getStatus();
         switch (playerStatus) {
             case PLAYING -> {
                 log.info("Stop");
-                setStatus("Player stoped");
+                setStatus("Player stopped");
                 player.stop();
             }
             case NOT_SPECIFIED, STOPPED -> {
@@ -41,7 +40,7 @@ public class PlayerService extends Observable {
         }
     }
 
-    void listItemSelected(int selectedIndex) {
+    public void listItemSelected(int selectedIndex) {
         log.info("listItemSelected {}", selectedIndex);
         setStatus("Play station: " + stationService.getStationsNames()[selectedIndex]);
         stationService.setSelectedStationIndex(selectedIndex);
