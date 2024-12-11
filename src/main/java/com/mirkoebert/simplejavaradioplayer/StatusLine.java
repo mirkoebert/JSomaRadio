@@ -11,7 +11,7 @@ public class StatusLine extends JLabel implements Observer {
 
 
     public StatusLine() {
-        super("Ready to play your favorite music.", SwingConstants.CENTER);
+        super("Ready to play your favorite music.", CENTER);
     }
 
     @Override
