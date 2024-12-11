@@ -18,7 +18,11 @@ public class StatusLine extends JLabel implements Observer {
     public void update(Observable o, Object arg) {
         log.info("Set status: {}", arg);
         try {
-            setText((String) arg);
+            if (arg == null) {
+                log.warn("Can't set status null");
+            } else {
+                setText((String) arg);
+            }
         } catch (Exception e) {
             log.warn("Can't set status {}", arg, e);
         }
