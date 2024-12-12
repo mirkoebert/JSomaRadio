@@ -13,38 +13,46 @@ import java.net.URL;
 @Service
 @RequiredArgsConstructor
 @Slf4j
-public class ResilientStreamPlayer {
+class ResilientStreamPlayer {
 
     private final Mp3StreamPlayer mp3StreamPlayer;
     private InputStream in;
     private URL audioStreamUrl;
 
-    public void playStream(final URL audioStreamUrl) {
+    void playStream(final URL audioStreamUrl) {
+        if (audioStreamUrl == null) {
+            log.warn("Expect not null audioStreamUrl but was null.");
+            return;
+        }
         this.audioStreamUrl = audioStreamUrl;
         openNewPlayerWithNewStream();
     }
 
     @Scheduled(fixedRate = 2000)
     void watchDog() {
-        final Status playerStatus = mp3StreamPlayer.getStatus();
-        switch (playerStatus) {
-            case PLAYING, PAUSED -> {
-                try {
-                    if (in == null) {
-                        log.warn("In stream is null");
-                    } else if (in.available() > 0) {
-                        log.debug("In stream is ok: {}", in.available());
-                        // TODO use a 'magic eye tube' input
-                    } else {
-                        log.warn("In stream is not ok");
-                        openNewPlayerWithNewStream();
+        try {
+            final Status playerStatus = mp3StreamPlayer.getStatus();
+            switch (playerStatus) {
+                case PLAYING, PAUSED -> {
+                    try {
+                        if (in == null) {
+                            log.warn("In stream is null");
+                        } else if (in.available() > 0) {
+                            log.debug("In stream is ok: {}", in.available());
+                            // TODO use a 'magic eye tube' input
+                        } else {
+                            log.warn("In stream is not ok");
+                            openNewPlayerWithNewStream();
+                        }
+                    } catch (IOException e) {
+                        log.warn("Can't determine stream {}", e.getMessage());
                     }
-                } catch (IOException e) {
-                    log.warn("Can't determine stream {}", e.getMessage());
                 }
+                case STOPPED, NOT_SPECIFIED -> log.debug("Player state {}, nothing to do", playerStatus);
+                default -> log.info("Unsupported player state {}", playerStatus);
             }
-            case STOPPED, NOT_SPECIFIED -> log.debug("Player state {}, nothing to do", playerStatus);
-            default -> log.info("Unsupported player state {}", playerStatus);
+        } catch (Exception e) {
+            log.error("Watchdog runs into an error", e);
         }
     }
 
