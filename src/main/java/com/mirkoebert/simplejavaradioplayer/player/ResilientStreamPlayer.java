@@ -18,12 +18,14 @@ class ResilientStreamPlayer {
     private final Mp3StreamPlayer mp3StreamPlayer;
     private InputStream in;
     private URL audioStreamUrl;
+    private ExpectedPlayerStatus expectedStatus = ExpectedPlayerStatus.NOT_SPECIFIED;
 
     void playStream(final URL audioStreamUrl) {
         if (audioStreamUrl == null) {
             log.warn("Expect not null audioStreamUrl but was null.");
             return;
         }
+        expectedStatus = ExpectedPlayerStatus.PLAYING;
         this.audioStreamUrl = audioStreamUrl;
         openNewPlayerWithNewStream();
     }
@@ -66,6 +68,7 @@ class ResilientStreamPlayer {
     }
 
     public void stop() {
+        expectedStatus = ExpectedPlayerStatus.STOPPED;
         mp3StreamPlayer.stop();
         try {
             in.close();
@@ -76,5 +79,15 @@ class ResilientStreamPlayer {
 
     public Status getStatus() {
         return mp3StreamPlayer.getStatus();
+    }
+
+    boolean isPlayerInProblems() {
+        if (expectedStatus.toString().equals(mp3StreamPlayer.getStatus().toString())) {
+            if ((expectedStatus == ExpectedPlayerStatus.PLAYING) && (in == null)) {
+                return true;
+            }
+            return false;
+        }
+        return true;
     }
 }
